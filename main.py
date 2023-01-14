@@ -4,8 +4,12 @@ import math
 from queue import PriorityQueue
 
 WIDTH = 800
-WIN = pygame.display.set_mode((WIDTH,WIDTH))
+WIN = pygame.display.set_mode((1200,WIDTH))
 pygame.display.set_caption("A* Pathfinding Algorithm")
+instructions = pygame.image.load("instructions.png").convert()
+instructions = pygame.transform.scale(instructions, (400,800))
+x = 800
+y = 000
 
 RED = (178,34,34)
 GREEN = (76,187,23)
@@ -167,6 +171,7 @@ def make_grid(rows, width):
     return grid
 
 def draw_grid(win, rows, width):
+    WIN.blit(instructions, (x, y))
     gap = width // rows
     for i in range(rows):
         pygame.draw.line(win, GREY, (0, i * gap),(width, i*gap),2)
@@ -202,10 +207,12 @@ def main(win, width):
 
     run = True
     started = False
+   
+    while run:        
 
-    while run:
         draw(win, grid, ROWS, width)
 
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -265,6 +272,10 @@ def main(win, width):
                             end = None
                         elif spot != end and spot != start:
                             spot.make_barrier()
+        
+        
+        
+        
 
     pygame.quit()
 
