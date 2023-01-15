@@ -223,28 +223,31 @@ def main(win, width):
             if pygame.mouse.get_pressed()[0]: #LEFT
                 pos = pygame.mouse.get_pos()
                 row, col = get_clicked_pos(pos, ROWS, width)
-                spot = grid[row][col]
-                if not start and spot != end:
-                    start = spot
-                    start.make_start()
-                
-                elif not end and spot != start:
-                    end = spot
-                    end.make_end()
-                
-                elif spot != end and spot != start:
-                    spot.make_barrier()
+                if row < 50 and col < 50:
+                    spot = grid[row][col]
+                    if not start and spot != end:
+                        start = spot
+                        start.make_start()
+                    
+                    elif not end and spot != start:
+                        end = spot
+                        end.make_end()
+                    
+                    elif spot != end and spot != start:
+                        spot.make_barrier()
+                    
 
                 
             elif pygame.mouse.get_pressed()[2]: # RIGHT
                 pos = pygame.mouse.get_pos()
                 row, col = get_clicked_pos(pos, ROWS, width)
-                spot = grid[row][col]
-                spot.reset()
-                if spot == start:
-                    	start = None
-                elif spot == end:
-                    	end = None
+                if row < 50 and col < 50:
+                    spot = grid[row][col]
+                    spot.reset()
+                    if spot == start:
+                            start = None
+                    elif spot == end:
+                            end = None
                 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and start and end:
@@ -260,7 +263,7 @@ def main(win, width):
                     grid = make_grid(ROWS, width)
                 
                 if event.key == pygame.K_r:
-                    print("MAZE")
+                    # print("MAZE")
                     for i in range(100):
                         col = random.randint(0,49)
                         row = random.randint(0,49)
